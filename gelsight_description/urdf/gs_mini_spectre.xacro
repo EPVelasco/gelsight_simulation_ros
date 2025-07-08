@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:macro name="gelsight_spectre" params="suffix parent r x y color">
+  <xacro:macro name="gelsight_spectre" params="suffix parent r x y color ">
     <link name="gelsight_spectre_${suffix}">
       <visual>
-        <origin rpy="${pi/2} 0 ${r}" xyz="${x} ${y} 0.027"/>
+        <origin rpy="${pi/2} 0 ${r}" xyz="${x} ${y} 0.0"/>
         <geometry>
           <mesh filename="package://gelsight_description/meshes/glass.stl" scale="0.001 0.001 0.001"/>
         </geometry>
@@ -33,7 +33,7 @@
     <joint name="gelsight_base_to_spectre_${suffix}" type="fixed">
       <parent link="${parent}"/>
       <child link="gelsight_spectre_${suffix}"/>
-      <origin xyz="0.1386 0.0115 0.015" rpy="0 0 0"/>
+      <origin xyz="0.0115 0.01386 0.051" rpy="0 0 0"/>
       <!-- <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/> -->
     </joint>
   </xacro:macro>
