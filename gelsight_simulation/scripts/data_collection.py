@@ -169,7 +169,7 @@ def collect_data():
                     # cv2.imwrite(
                     #     BASE_DEPTH + '/' + solid + '__' + str(k) + '__' + str(x) + '_' + str(y) + '_' + str(z) + '.bmp',
                     #     gelsight_depth)
-                    np.save(BASE_DEPTH + '/' + solid + '__' + str(k) + '__' + str(x) + '_' + str(y) + '_' + str(z) + '.npy', gelsight_depth)
+                 #   np.save(BASE_DEPTH + '/' + solid + '__' + str(k) + '__' + str(x) + '_' + str(y) + '_' + str(z) + '.npy', gelsight_depth)
 
 
 
