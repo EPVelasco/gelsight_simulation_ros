@@ -188,10 +188,10 @@
     <!-- <xacro:gelsight_spectre suffix="left" parent="gs_base_link" r="0" x="0.01" y="0" color="1 0 0"/>
     <xacro:gelsight_spectre suffix="right" parent="gs_base_link" r="0" x="-0.01" y="0" color="0 0 1"/> -->
 
-    <xacro:gelsight_spectre suffix="right" parent="gs_base_link" color="1.0 0.2 0.45" r="0" x="-0.0085" y="-0.011"/>
-    <xacro:gelsight_spectre suffix="bottom" parent="gs_base_link" color="0.4 1.0 0.6" r="${pi/2}" x="0.0085" y="-0.011"/>
-    <xacro:gelsight_spectre suffix="left" parent="gs_base_link" color="1.0 1.0 1.0" r="${pi}" x="0.0085" y="0.011"/>
-    <xacro:gelsight_spectre suffix="top" parent="gs_base_link" color="0.2 0.5 1.0" r="${pi + pi/2}" x="-0.0085" y="0.011"/>
+    <xacro:gelsight_spectre suffix="bottom" parent="gs_base_link" color="1.0 0.2 0.45" r="0" x="-0.007" y="-0.012" scale_w = "0.0005"/>
+    <xacro:gelsight_spectre suffix="right" parent="gs_base_link" color="0.4 1.0 0.6" r="${pi/2}" x="0.0085" y="-0.013" scale_w = "0.0008"/>
+    <xacro:gelsight_spectre suffix="top" parent="gs_base_link" color="1.0 1.0 1.0" r="${pi}" x="0.007" y="0.012" scale_w = "0.0005"/>
+    <xacro:gelsight_spectre suffix="left" parent="gs_base_link" color="0.2 0.5 1.0" r="${pi + pi/2}" x="-0.0085" y="0.013" scale_w = "0.0008"/>
 
 
 
