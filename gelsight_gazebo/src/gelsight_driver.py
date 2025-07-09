@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import rospy
 import rospkg
+import time
 
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
@@ -78,11 +79,15 @@ def solid_color_img(color, size):
 def add_overlay(rgb, alpha, color):
     s = np.shape(alpha)
 
+
     opacity3 = np.repeat(alpha, 3).reshape((s[0], s[1], 3))  # * 10.0
 
     overlay = solid_color_img(color, s)
 
     foreground = opacity3 * overlay
+   
+
+    
     background = (1.0 - opacity3) * rgb.astype(np.float64)
     res = background + foreground
 
@@ -318,11 +323,12 @@ class GelSightDriver:
         while not rospy.is_shutdown():
             if self.depth_img is None or self.visual_img is None:
                 continue
-
+         #   start = time.time()
             tactile_img = self.simulation_approach.generate(self.depth_img)
+         #   print("Generate time: ", time.time() - start)
             self.publish(tactile_img)
             self.rate.sleep()
-            cv2.waitKey(1)
+          #  cv2.waitKey(1)
 
 
 def main():
@@ -340,17 +346,24 @@ def main():
         {'position': [0, -1, 0.25], 'color': (108, 82, 255), 'kd': 0.6, 'ks': 0.4},  # red, bottom
         {'position': [1, 0, 0.25], 'color': (120, 255, 153), 'kd': 0.1, 'ks': 0.1},  # green, left
     ]
+    
+    light_sources_gs_mini2025 = [
+        {'position': [0, 1, 0.25], 'color': (120, 255, 153), 'kd': 0.5, 'ks': 0.5},  # green, top
+        {'position': [-1, 0, 0.25], 'color': (255, 130, 115), 'kd': 0.5, 'ks': 0.5},  # blue, right
+        {'position': [0, -1, 0.25], 'color': (0, 0, 0), 'kd': 0.1, 'ks': 0.1},  # white, bottom
+        {'position': [1, 0, 0.25], 'color': (108, 82, 255), 'kd': 0.5, 'ks': 0.5},  # red, left
+    ]
 
-    background_img = cv2.imread(PKG_PATH + '/assets/background.png')
-    ka = 0.8
+    background_img = cv2.imread(PKG_PATH + '/assets/back_gs_mini_320_240.png')
+    ka = 1.0
 
     px2m_ratio = 5.4347826087e-05
     elastomer_thickness = 0.004
-    min_depth = 0.026  # distance from the image sensor to the rigid glass outer surface
+    min_depth = 0.014  # distance from the image sensor to the rigid glass outer surface
     texture_sigma = 0.00001
 
     simulation_approach = SimulationApproach(
-        light_sources=light_sources_smartlab2014,
+        light_sources=light_sources_gs_mini2025,
         background_img=background_img,
         ka=ka,
         texture_sigma=texture_sigma,
